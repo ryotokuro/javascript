@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="#" />
+    <title>JS Drum Kit</title>
+    <link rel="stylesheet" href="/assets/stylesheets/style.css">
+</head>
+
+<body>
+    <section id="gap"></section>
+    
+    <!-- Top Row -->
+    <section class="keys">
+        <!-- Crash Cymbal -->
+        <div data-key="82" class="key">
+            <kbd>R</kbd>
+            <span class="sound">Crash</span>
+        </div>
+
+        <!-- Small Tom -->
+        <div data-key="84" class="key">
+            <kbd>T</kbd>
+            <span class="sound">Small Tom</span>
+        </div>
+
+        <!-- Bass Drum -->
+        <div data-key="89" class="key">
+            <kbd>Y</kbd>
+            <span class="sound">Bass Drum</span>
+        </div>
+
+        <!-- Medium Tom -->
+        <div data-key="85" class="key">
+            <kbd>U</kbd>
+            <span class="sound">Medium Tom</span>
+        </div>
+
+        <!-- Ride Cymbal -->
+        <div data-key="73" class="key">
+            <kbd>I</kbd>
+            <span class="sound">Ride</span>
+        </div>
+    </section>
+
+    <!-- Bottom Row -->
+    <section class="keys">
+        <!-- Hi Hat -->
+        <div data-key="68" class="key">
+            <kbd>D</kbd>
+            <span class="sound">Hi-Hat</span>
+        </div>
+
+        <!-- Snare Drum -->
+        <div data-key="70" class="key">
+            <kbd>F</kbd>
+            <span class="sound">Snare</span>
+        </div>
+
+        <!-- Floor Tom -->
+        <div data-key="74" class="key">
+            <kbd>J</kbd>
+            <span class="sound">Floor Tom</span>
+        </div>
+    </section>
+
+    <!-- Audio Files -->
+    <audio data-key="82" src="/assets/sounds/kick.wav"></audio>
+    <audio data-key="84" src="/assets/sounds/clap.wav"></audio>
+    <audio data-key="89" src="/assets/sounds/boom.wav"></audio>
+    <audio data-key="85" src="/assets/sounds/openhat.wav"></audio>
+    <audio data-key="73" src="/assets/sounds/ride.wav"></audio>
+
+    <audio data-key="68" src="/assets/sounds/hihat.wav"></audio>
+    <audio data-key="70" src="/assets/sounds/snare.wav"></audio>
+    <audio data-key="74" src="/assets/sounds/tom.wav"></audio>
+
+    <!-- JavaScript -->
+    <script>
+        function playSound(e) {
+            // Retrieve the audio element
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            // Log the corresponding audio element that it's retrieving
+            //console.log(audio);
+            if (!audio) {
+                return; // don't log null element
+            }
+
+            // Get the associated key element by filtering by elements with .key
+            const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+            key.classList.add("playing");
+            // console.log(key);
+
+            // For multiple plays
+            audio.currentTime = 0; // Rewind to the beginning
+            audio.play() // Then play the actual audio element
+        }
+
+        function removeTransition(e) {
+            // listen to the element for the transform property to end
+            if (e.propertyName !== "transform") return;
+
+            this.classList.remove("playing"); // then return move the attribute
+        }
+
+        // Reset transition once it has reached its end
+        const keys = document.querySelectorAll('.key');
+        console.log(keys); // print NodeList (like an array) of elements
+        // Loop over every element in the node list
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+        // Listen for when a key is pressed (keydown event)
+        window.addEventListener('keydown', playSound);
+    </script>
+</body></html>
