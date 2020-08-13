@@ -23,20 +23,21 @@ html {
     min-height: 30vh;
 }
 
-
 .key {
     border: .4rem solid black;
-    border-radius: 20%;
     margin: 1rem;
     padding: 5rem .5rem;
-    width: 16rem;
+    width: 15rem;
     transition: all .07s ease;
 
     font-size: 1.5rem;
     text-align: center;
     color: white;
-    background: rgba(255, 255, 255, 0.4);
     text-shadow: 0 0 .5rem black;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
 }
 
 kbd {
