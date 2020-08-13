@@ -34,10 +34,8 @@ html {
     text-align: center;
     color: white;
     text-shadow: 0 0 .5rem black;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 20%;
 }
 
 kbd {
